@@ -1,0 +1,102 @@
+ext {
+    minSdkVersion = 21
+    targetSdkVersion = 32
+    versionCode = 1
+    versionName = "1.0"
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    /**
+     *  Libraries
+     */
+    //Core
+    coreKtxVersion = '1.6.0'
+    appcompatVersion = '1.3.1'
+
+    //Coroutines
+    coroutinesVersion = '1.5.2'
+
+    //UI
+    materialVersion = '1.4.0'
+    constraintlayoutVersion = '2.1.2'
+    glideVersion = '4.12.0'
+
+    //Lifecycle
+    lifeCycleExtensionsVersion = '2.2.0'
+    lifeCycleVersion = '2.3.2'
+
+    //Navigation
+    navigationVersion = '2.4.2'
+
+    //Hilt
+    hiltVersion = '2.40.5'
+    hiltViewModelVersion = '1.0.0-alpha03'
+
+    //Network
+    retrofitVersion = '2.9.0'
+    moshiVersion = '1.12.0'
+    okhttpVersion = '4.9.1'
+
+    //Datastore
+    datastoreVersion = '1.0.0'
+    protobuffVersion = '3.18.0'
+
+    //Test
+    junitVersion = '4.13.2'
+    supportTestVersion = '1.1.3'
+    espressoVersion = '3.4.0'
+
+    coreDependencies = [
+            androidCoreKtx: "androidx.core:core-ktx:$coreKtxVersion",
+            appcompat     : "androidx.appcompat:appcompat:$appcompatVersion"
+    ]
+
+    coroutinesDependencies = [
+            coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    ]
+
+    uiDependencies = [
+            material                    : "com.google.android.material:material:$materialVersion",
+            constraintlayout            : "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion",
+
+            glideCompiler               : "com.github.bumptech.glide:compiler:$glideVersion",
+            glideReciclerViewIntegration: "com.github.bumptech.glide:recyclerview-integration:$glideVersion"
+    ]
+
+    navigationDependencies = [
+            navigationUIKtx      : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+            navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            safeArgs             : "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+    ]
+
+    lifecycleDependencies = [
+            viewmodelKtx       : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion",
+            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:$lifeCycleExtensionsVersion"
+    ]
+
+    hiltDependencies = [
+            hiltDagger            : "com.google.dagger:hilt-android:$hiltVersion",
+            hiltDaggerCompiler    : "com.google.dagger:hilt-android-compiler:$hiltVersion",
+            hiltLifecycleViewmodel: "androidx.hilt:hilt-lifecycle-viewmodel:$hiltViewModelVersion",
+    ]
+
+    networkDependencies = [
+            retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitMoshiConverter: "com.squareup.retrofit2:converter-moshi:$retrofitVersion",
+            moshi                 : "com.squareup.moshi:moshi:$moshiVersion",
+            okHttp                : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            moshiKotlin           : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
+    ]
+
+    datastoreDependencies = [
+            datastore: "androidx.datastore:datastore:$datastoreVersion",
+            protobuff: "com.google.protobuf:protobuf-javalite:$protobuffVersion"
+    ]
+
+    appTestDependencies = [
+
+            junit       : "junit:junit:$junitVersion",
+            supportJunit: "androidx.test.ext:junit:$supportTestVersion",
+            espresso    : "androidx.test.espresso:espresso-core:$espressoVersion"
+    ]
+}
