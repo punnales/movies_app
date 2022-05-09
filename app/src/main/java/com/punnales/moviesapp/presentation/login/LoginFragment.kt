@@ -3,12 +3,13 @@ package com.punnales.moviesapp.presentation.login
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.punnales.moviesapp.R
 import com.punnales.moviesapp.core.mvi.*
 import com.punnales.moviesapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewState, LoginFragment.SingleEvent, LoginViewModel>() {
+class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewState, LoginFragment.SingleEvent, LoginViewModel>(R.layout.fragment_login) {
 
     override val viewModel: LoginViewModel by viewModels()
 
@@ -20,13 +21,13 @@ class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewS
     }
 
     override fun setupViews() {
-        TODO("Not yet implemented")
+
     }
 
     override fun render(viewState: ViewState) {
         when (viewState) {
-            ViewState.Idle -> TODO()
-            ViewState.Loading -> TODO()
+            ViewState.Idle -> {}
+            ViewState.Loading -> {}
         }
     }
 
@@ -35,7 +36,7 @@ class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewS
     }
 
     sealed class UserIntent : MviIntent {
-        class Login(val user: String, val password: String): UserIntent()
+        class Login(val user: String, val password: String) : UserIntent()
     }
 
     sealed class ViewState : MviViewState {
