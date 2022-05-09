@@ -46,7 +46,6 @@ dependencies {
     //Hilt
     api hiltDependencies.hiltDagger
     kapt hiltDependencies.hiltDaggerCompiler
-    api hiltDependencies.hiltLifecycleViewmodel
 
     //Test
     testApi appTestDependencies.junit
