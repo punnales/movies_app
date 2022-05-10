@@ -2,10 +2,10 @@ package com.punnales.moviesapp.data.remote.service
 
 import com.punnales.moviesapp.BuildConfig
 import com.punnales.moviesapp.data.remote.dto.LoginResponseDTO
+import com.punnales.moviesapp.data.remote.dto.UserResponseDTO
 import com.punnales.moviesapp.data.remote.utils.ENDPOINT_LOGIN
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import com.punnales.moviesapp.data.remote.utils.ENDPOINT_USER_PROFILE
+import retrofit2.http.*
 
 interface MovieAppService {
 
@@ -19,5 +19,8 @@ interface MovieAppService {
         @Field("client_id") clientId: String = BuildConfig.CLIENT_ID,
         @Field("client_secret") client_secret: String = BuildConfig.CLIENT_SECRET,
     ): LoginResponseDTO
+
+    @GET(ENDPOINT_USER_PROFILE)
+    suspend fun fetchUserProfile(@Header("Authorization") accessToken: String): UserResponseDTO
 
 }

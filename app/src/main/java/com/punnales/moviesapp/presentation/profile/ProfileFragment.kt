@@ -1,4 +1,4 @@
-package com.punnales.moviesapp.presentation.login
+package com.punnales.moviesapp.presentation.profile
 
 import android.os.Bundle
 import android.view.View
@@ -6,60 +6,64 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.punnales.moviesapp.R
-import com.punnales.moviesapp.core.mvi.*
-import com.punnales.moviesapp.databinding.FragmentLoginBinding
+import com.punnales.moviesapp.core.domain.User
+import com.punnales.moviesapp.core.mvi.AMviFragment
+import com.punnales.moviesapp.core.mvi.MviIntent
+import com.punnales.moviesapp.core.mvi.MviSingleEvent
+import com.punnales.moviesapp.core.mvi.MviViewState
+import com.punnales.moviesapp.databinding.FragmentProfileBinding
 import com.punnales.moviesapp.presentation.utils.MoviesAppProgressLoader
 import com.punnales.moviesapp.presentation.utils.MoviesAppProgressLoader.Companion.TAG
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewState, LoginFragment.SingleEvent, LoginViewModel>(R.layout.fragment_login) {
+class ProfileFragment : AMviFragment<ProfileFragment.UserIntent, ProfileFragment.ViewState, ProfileFragment.SingleEvent, ProfileViewModel>(R.layout.fragment_profile) {
 
-    override val viewModel: LoginViewModel by viewModels()
+    override val viewModel: ProfileViewModel by viewModels()
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentProfileBinding
     private lateinit var moviesAppProgressLoader: MoviesAppProgressLoader
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentLoginBinding.bind(view)
+        binding = FragmentProfileBinding.bind(view)
         moviesAppProgressLoader = MoviesAppProgressLoader()
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun setupViews() {
-        setupLoginButton()
-    }
-
-    private fun setupLoginButton() {
-        with(binding) {
-            btnLoginUser.setOnClickListener {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.sendUserIntent(UserIntent.Login(
-                        etLoginEmail.text?.toString() ?: "",
-                        etLoginPassword.text?.toString() ?: ""
-                    ))
-                }
-            }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.sendUserIntent(UserIntent.UpdateUserProfile)
         }
     }
 
     override fun render(viewState: ViewState) {
+
+        if (viewState != ViewState.Loading)
+            hideProgressLoader()
+
         when (viewState) {
-            ViewState.Idle -> {
-                hideProgressLoader()
-            }
+            ViewState.Idle -> {}
             ViewState.Loading -> {
                 showProgressLoader()
             }
+            is ViewState.Loaded -> {
+                handleLoadedState(viewState)
+            }
+        }
+    }
+
+    private fun handleLoadedState(viewState: ViewState.Loaded) {
+        with(viewState.user) {
+            binding.tvProfileName.text = getString(R.string.full_name, firstName, lastName)
+            binding.tvProfileEmail.text = email
+            binding.tvProfilePhoneNumber.text = phoneNumber
+            binding.tvProfileCardNumber.text = getString(R.string.profile_card_number, cardNumber)
         }
     }
 
     override fun handleSingleEvent(event: SingleEvent) {
         when (event) {
-            SingleEvent.NavigateToHomeFragment -> navController.navigate(LoginFragmentDirections.actionLoginFragmentToProfileFragment())
             SingleEvent.ShowConnectionError -> showAlert(R.string.alert_connection_error)
-            SingleEvent.ShowWrongCredentialsError -> showAlert(R.string.alert_credentials_error)
         }
     }
 
@@ -78,17 +82,16 @@ class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewS
     }
 
     sealed class UserIntent : MviIntent {
-        class Login(val user: String, val password: String) : UserIntent()
+        object UpdateUserProfile : UserIntent()
     }
 
     sealed class ViewState : MviViewState {
         object Idle : ViewState()
         object Loading : ViewState()
+        class Loaded(val user: User) : ViewState()
     }
 
     sealed class SingleEvent : MviSingleEvent {
-        object NavigateToHomeFragment : SingleEvent()
-        object ShowWrongCredentialsError : SingleEvent()
         object ShowConnectionError : SingleEvent()
     }
 

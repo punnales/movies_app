@@ -13,7 +13,7 @@ import com.punnales.moviesapp.databinding.MovieAppProgressLoaderBinding
 class MoviesAppProgressLoader : DialogFragment() {
 
     companion object {
-        const val TAG = "MANDAO_PROGRESS_LOADER"
+        const val TAG = "MOVIES_APP_PROGRESS_LOADER"
     }
 
     private lateinit var binding: MovieAppProgressLoaderBinding

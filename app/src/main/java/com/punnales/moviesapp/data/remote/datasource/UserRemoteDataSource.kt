@@ -10,4 +10,6 @@ interface UserRemoteDataSource : BaseDataSource {
 
     suspend fun login(userName: String, password: String): Resource<User>
 
+    suspend fun fetchUserProfile(accessToken: String): Resource<User>
+
 }

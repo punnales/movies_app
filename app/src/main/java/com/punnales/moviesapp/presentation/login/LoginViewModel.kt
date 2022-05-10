@@ -1,6 +1,9 @@
 package com.punnales.moviesapp.presentation.login
 
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
+import com.punnales.moviesapp.UserProto
+import com.punnales.moviesapp.core.domain.User
 import com.punnales.moviesapp.core.interactors.LoginUser
 import com.punnales.moviesapp.core.mvi.AMviViewModel
 import com.punnales.moviesapp.presentation.login.LoginFragment.*
@@ -13,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val loginUser: LoginUser) : AMviViewModel<UserIntent, ViewState, SingleEvent>() {
+class LoginViewModel @Inject constructor(private val loginUser: LoginUser, private val userDatastore: DataStore<UserProto>) : AMviViewModel<UserIntent, ViewState, SingleEvent>() {
 
     private val _viewState =
         MutableStateFlow<ViewState>(ViewState.Idle)
@@ -40,8 +43,8 @@ class LoginViewModel @Inject constructor(private val loginUser: LoginUser) : AMv
                     }
                     LoginUser.LoginUserResult.Loading -> _viewState.update { ViewState.Loading }
                     is LoginUser.LoginUserResult.Success -> {
+                        storeUserData(it.user)
                         _viewState.update { ViewState.Idle }
-                        storeUserData()
                         sendEvent(SingleEvent.NavigateToHomeFragment)
                     }
                 }
@@ -49,7 +52,13 @@ class LoginViewModel @Inject constructor(private val loginUser: LoginUser) : AMv
         }
     }
 
-    private fun storeUserData() {
-
+    private suspend fun storeUserData(user: User) {
+        userDatastore.updateData {
+            it.toBuilder()
+                .setAccessToken(user.accessToken)
+                .setTokenType(user.tokenType)
+                .setUserName(user.userName)
+                .build()
+        }
     }
 }

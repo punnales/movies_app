@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_login_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@color/material_on_surface_stroke"
+        android:elevation="2dp"
+        android:src="@drawable/ic_user"
+        app:contentPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08"
+        app:shapeAppearance="@style/MovieApp.ShapeAppearance.CircleComponent"
+        app:strokeColor="@color/material_on_surface_stroke"
+        app:strokeWidth="1dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:shapeAppearance="@style/ShapeAppearance.Card" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:elevation="1dp"
+        android:text="@string/welcome"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login_image" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:elevation="1dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_profile_welcome"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_welcome"
+        tools:text="Jorge Alejandro Puñales Fernández" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:elevation="1dp"
+        android:textColor="@color/stroke_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_profile_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_name"
+        tools:text="jorge@gmail.com" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_phone_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:elevation="1dp"
+        android:textColor="@color/stroke_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_profile_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_email"
+        tools:text="+53 55368275" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_card_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="1dp"
+        android:textColor="@color/stroke_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_phone_number"
+        tools:text="Card No: 1303030981578736" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_login_email"
+        style="@style/MovieApp.TextInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:elevation="1dp"
+        android:hint="@string/card_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_phone_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_login_email"
+            style="@style/MovieApp.TextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:drawableStart="@drawable/ic_dni"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_card_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:elevation="1dp"
+        android:text="@string/profile_transactions_hint"
+        android:textColor="@color/stroke_gray"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/til_login_email"
+        app:layout_constraintStart_toStartOf="@+id/til_login_email"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_email" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_user"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/show"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_card_hint"
+        app:shapeAppearance="@style/MovieApp.PrimaryButtonShapeAppearance" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,16 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="ShapeAppearance.Card" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSizeTopLeft">10%</item>
+        <item name="cornerSizeTopRight">10%</item>
+    </style>
+
+    <style name="MovieApp.ShapeAppearance.CircleComponent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="MovieApp.TextInputShapeAppearance" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerSize">20%</item>
     </style>

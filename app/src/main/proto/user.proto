@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.punnales.moviesapp";
+option java_multiple_files = true;
+
+message UserProto {
+
+  string accessToken = 1;
+  string tokenType = 2;
+  string userName = 3;
+  string email = 4;
+  string firstName = 5;
+  string lastName = 6;
+  string phoneNumber = 7;
+  string profilePicture = 8;
+  string cardNumber = 9;
+}
