@@ -18,6 +18,13 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+
+        //I will configure this keys without repository protection to allow an easy way to
+        //build the application without add new files.
+        buildConfigField 'String', 'API_KEY', "\"" + "stage_HNYh3RaK_Test" + "\""
+        buildConfigField 'String', 'CLIENT_ID', "\"" + "IATestCandidate" + "\""
+        buildConfigField 'String', 'CLIENT_SECRET', "\"" + "c840457e777b4fee9b510fbcd4985b68" + "\""
+
     }
 
     buildTypes {
@@ -35,24 +42,31 @@ android {
 dependencies {
 
     //Android core
-    api coreDependencies.androidCoreKtx
-    api coreDependencies.appcompat
-    api coroutinesDependencies.coroutines
+    implementation coreDependencies.androidCoreKtx
+    implementation coreDependencies.kotlinReflect
+    implementation coreDependencies.appcompat
+    implementation coroutinesDependencies.coroutines
 
     //UI
-    api uiDependencies.material
-    api uiDependencies.constraintlayout
+    implementation uiDependencies.material
+    implementation uiDependencies.constraintlayout
 
     //Navigation
-    api navigationDependencies.navigationUIKtx
-    api navigationDependencies.navigationFragmentKtx
+    implementation navigationDependencies.navigationUIKtx
+    implementation navigationDependencies.navigationFragmentKtx
 
     //Hilt
-    api hiltDependencies.hiltDagger
+    implementation hiltDependencies.hiltDagger
     kapt hiltDependencies.hiltDaggerCompiler
 
+    implementation networkDependencies.retrofit
+    implementation networkDependencies.retrofitMoshiConverter
+    implementation networkDependencies.moshi
+    implementation networkDependencies.moshiKotlin
+    implementation networkDependencies.okHttp
+
     //Test
-    testApi appTestDependencies.junit
-    androidTestApi appTestDependencies.supportJunit
-    androidTestApi appTestDependencies.espresso
+    testImplementation appTestDependencies.junit
+    androidTestImplementation appTestDependencies.supportJunit
+    androidTestImplementation appTestDependencies.espresso
 }
