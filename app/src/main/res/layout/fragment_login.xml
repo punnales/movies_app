@@ -85,6 +85,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_user"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="0dp"
         android:layout_height="90dp"
@@ -97,6 +98,4 @@
         app:layout_constraintStart_toStartOf="@+id/til_login_password"
         app:layout_constraintTop_toBottomOf="@+id/til_login_password"
         app:shapeAppearance="@style/MovieApp.PrimaryButtonShapeAppearance" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

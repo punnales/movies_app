@@ -33,9 +33,7 @@ object NetworkModule {
             .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(CONNECTION_TIME_OUT, TimeUnit.SECONDS)
-            .addInterceptor {
-                it.proceed(it.request()) //TODO Debug purposes, delete before delivery
-            }
+            .addInterceptor(authInterceptor)
             .build()
     }
 

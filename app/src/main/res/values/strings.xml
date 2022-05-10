@@ -4,4 +4,6 @@
     <string name="password">PASSWORD</string>
     <string name="login_subtitle">Please sign in to continue</string>
     <string name="login">Login</string>
+    <string name="alert_connection_error">It seems that you are encountering connection issues, please try again.</string>
+    <string name="alert_credentials_error">Email or password is invalid.</string>
 </resources>

@@ -50,6 +50,9 @@ dependencies {
     //UI
     implementation uiDependencies.material
     implementation uiDependencies.constraintlayout
+    kapt uiDependencies.glideCompiler
+    implementation uiDependencies.glideReciclerViewIntegration
+    implementation uiDependencies.lottie
 
     //Navigation
     implementation navigationDependencies.navigationUIKtx
@@ -59,6 +62,7 @@ dependencies {
     implementation hiltDependencies.hiltDagger
     kapt hiltDependencies.hiltDaggerCompiler
 
+    //Network
     implementation networkDependencies.retrofit
     implementation networkDependencies.retrofitMoshiConverter
     implementation networkDependencies.moshi

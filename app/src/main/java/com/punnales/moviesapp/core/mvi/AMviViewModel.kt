@@ -38,7 +38,7 @@ abstract class AMviViewModel<I : MviIntent, S : MviViewState, E : MviSingleEvent
         userIntentChannel.send(intent)
     }
 
-    private suspend fun sendEvent(event: E) {
+    suspend fun sendEvent(event: E) {
         singleEventChannel.send(event)
     }
 
