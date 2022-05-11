@@ -39,6 +39,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        binding.bottomNavigationView.visibility = if (destination.label == "ProfileFragment") View.VISIBLE else View.GONE
+        binding.bottomNavigationView.visibility = if (destination.label in arrayOf("ProfileFragment", "MovieListFragment")) View.VISIBLE else View.GONE
     }
 }

@@ -1,4 +1,4 @@
-package com.punnales.moviesapp.core.interactors
+package com.punnales.moviesapp.core.interactors.user
 
 import com.punnales.moviesapp.core.domain.User
 import com.punnales.moviesapp.data.remote.datasource.UserRemoteDataSource

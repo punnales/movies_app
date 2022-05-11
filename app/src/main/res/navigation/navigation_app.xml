@@ -21,4 +21,10 @@
         android:name="com.punnales.moviesapp.presentation.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/movie_list_fragment"
+        android:name="com.punnales.moviesapp.presentation.movie_list.MovieListFragment"
+        android:label="MovieListFragment"
+        tools:layout="@layout/fragment_movie_list" />
 </navigation>

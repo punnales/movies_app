@@ -68,6 +68,7 @@ dependencies {
     implementation uiDependencies.constraintlayout
     kapt uiDependencies.glideCompiler
     implementation uiDependencies.glideReciclerViewIntegration
+    implementation uiDependencies.swipeRefreshLayout
     implementation uiDependencies.lottie
 
     //Navigation
@@ -81,6 +82,15 @@ dependencies {
     //Datastore
     implementation datastoreDependencies.datastore
     implementation datastoreDependencies.protobuff
+
+    //Room
+    implementation roomDependencies.room
+    implementation roomDependencies.roomRuntime
+    kapt roomDependencies.roomCompiler
+    implementation roomDependencies.roomPaging
+
+    //Paging
+    implementation pagingDependencies.pagingRuntime
 
     //Network
     implementation networkDependencies.retrofit

@@ -1,5 +1,7 @@
 package com.punnales.moviesapp.data.remote.di
 
+import com.punnales.moviesapp.data.remote.datasource.MovieRemoteDataSource
+import com.punnales.moviesapp.data.remote.datasource.MovieRemoteDataSourceImpl
 import com.punnales.moviesapp.data.remote.datasource.UserRemoteDataSource
 import com.punnales.moviesapp.data.remote.datasource.UserRemoteDataSourceImpl
 import dagger.Binds
@@ -13,5 +15,8 @@ abstract class RemoteDataSourceModule {
 
     @Binds
     abstract fun bindUserRemoteDataSource(userRemoteDataSourceImpl: UserRemoteDataSourceImpl): UserRemoteDataSource
+
+    @Binds
+    abstract fun bindMoviesRemoteDataSource(moviesRemoteDataSourceImpl: MovieRemoteDataSourceImpl): MovieRemoteDataSource
 
 }

@@ -3,7 +3,7 @@ package com.punnales.moviesapp.presentation.profile
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
 import com.punnales.moviesapp.UserProto
-import com.punnales.moviesapp.core.interactors.FetchUserProfile
+import com.punnales.moviesapp.core.interactors.user.FetchUserProfile
 import com.punnales.moviesapp.core.mvi.AMviViewModel
 import com.punnales.moviesapp.data.local.datastore.mapper.fomDatastore
 import com.punnales.moviesapp.presentation.profile.ProfileFragment.*

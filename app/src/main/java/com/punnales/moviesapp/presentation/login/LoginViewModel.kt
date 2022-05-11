@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
 import com.punnales.moviesapp.UserProto
 import com.punnales.moviesapp.core.domain.User
-import com.punnales.moviesapp.core.interactors.LoginUser
+import com.punnales.moviesapp.core.interactors.user.LoginUser
 import com.punnales.moviesapp.core.mvi.AMviViewModel
 import com.punnales.moviesapp.presentation.login.LoginFragment.*
 import dagger.hilt.android.lifecycle.HiltViewModel
