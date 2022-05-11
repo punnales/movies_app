@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.punnales.moviesapp.UserProto
 import com.punnales.moviesapp.core.interactors.user.FetchUserProfile
 import com.punnales.moviesapp.core.mvi.AMviViewModel
-import com.punnales.moviesapp.data.local.datastore.mapper.fomDatastore
+import com.punnales.moviesapp.data.local.datastore.mapper.fromDatastore
 import com.punnales.moviesapp.presentation.profile.ProfileFragment.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -30,7 +30,7 @@ class ProfileViewModel @Inject constructor(
     private fun observeLocalUserProfile() {
         viewModelScope.launch {
             userDataStore.data.collect { userProto ->
-                _viewState.update { ViewState.Loaded(userProto.fomDatastore()) }
+                _viewState.update { ViewState.Loaded(userProto.fromDatastore()) }
             }
         }
     }
@@ -49,7 +49,9 @@ class ProfileViewModel @Inject constructor(
                 fetchUserProfile("${user.tokenType} ${user.accessToken}").collect { result ->
                     when (result) {
                         FetchUserProfile.FetchUserProfileResult.ConnectionError -> {
-                            _viewState.update { ViewState.Idle }
+                            userDataStore.data.firstOrNull()?.let { userProto ->
+                                _viewState.update { ViewState.Loaded(userProto.fromDatastore()) }
+                            }
                             sendEvent(SingleEvent.ShowConnectionError)
                         }
                         FetchUserProfile.FetchUserProfileResult.Loading -> {

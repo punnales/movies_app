@@ -17,8 +17,11 @@
         tools:ignore="UnusedAttribute">
         <activity
             android:name=".presentation.MainActivity"
+            android:configChanges="orientation"
             android:exported="true"
-            android:theme="@style/SplashScreenTheme">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashScreenTheme"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
