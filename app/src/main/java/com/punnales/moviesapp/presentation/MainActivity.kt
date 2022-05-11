@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_MoviesApp)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

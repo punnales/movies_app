@@ -79,6 +79,7 @@ class MovieDetailsFragment : AMviFragment<MovieDetailsFragment.UserIntent, Movie
     ) {
         Glide.with(this)
             .load(imageAddress)
+            .placeholder(R.color.black_variant)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,

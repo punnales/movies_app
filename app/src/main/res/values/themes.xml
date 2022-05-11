@@ -17,6 +17,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="SplashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
     <style name="MovieApp.TextInputLayout" parent="">
         <item name="boxBackgroundMode">outline</item>
         <item name="boxStrokeWidth">0dp</item>
