@@ -33,7 +33,7 @@ class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewS
 
     private fun setupLoginButton() {
         with(binding) {
-            btnLoginUser.setOnClickListener {
+            btnLogin.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.sendUserIntent(UserIntent.Login(
                         etLoginEmail.text?.toString() ?: "",

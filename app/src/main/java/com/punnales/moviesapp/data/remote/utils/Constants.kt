@@ -6,5 +6,5 @@ internal const val API_KEY_HEADER_NAME = "api_key"
 //Endpoints
 internal const val ENDPOINT_LOGIN = "/v2/oauth/token"
 internal const val ENDPOINT_USER_PROFILE = "/v1/members/profile?country_code=MX"
-internal const val ENDPOINT_LOYALTY = "/v1/members/loyalty"
+internal const val ENDPOINT_TRANSACTIONS = "http://aws-ami-api.cinepolis.com/v2/members/loyalty"
 internal const val ENDPOINT_MOVIES = "/v2/movies?country_code=MX&cinema=61"

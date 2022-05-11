@@ -1,6 +1,5 @@
-package com.punnales.moviesapp.data.remote.dto
+package com.punnales.moviesapp.data.remote.dto.response
 
-import com.punnales.moviesapp.core.domain.Media
 import com.squareup.moshi.Json
 
 data class MovieResponseDTO(

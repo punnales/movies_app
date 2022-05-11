@@ -58,6 +58,10 @@ object NetworkModule {
     @Singleton
     fun provideAuthInterceptor(): Interceptor =
         Interceptor { chain ->
-            chain.proceed(chain.request().newBuilder().addHeader(API_KEY_HEADER_NAME, BuildConfig.API_KEY).build())
+            chain.proceed(chain
+                .request()
+                .newBuilder()
+                .addHeader(API_KEY_HEADER_NAME, if (chain.request().url.toString().contains("aws")) BuildConfig.API_KEY_AWS else BuildConfig.API_KEY)
+                .build())
         }
 }

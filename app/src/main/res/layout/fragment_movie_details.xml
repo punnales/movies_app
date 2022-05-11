@@ -41,7 +41,6 @@
         android:layout_marginStart="16dp"
         android:elevation="8dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_movie"
         app:layout_constraintBottom_toTopOf="@+id/guideline_movie_detail_30"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_movie_detail_30"

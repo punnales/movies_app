@@ -1,4 +1,4 @@
-package com.punnales.moviesapp.data.remote.dto
+package com.punnales.moviesapp.data.remote.dto.response
 
 import com.squareup.moshi.Json
 

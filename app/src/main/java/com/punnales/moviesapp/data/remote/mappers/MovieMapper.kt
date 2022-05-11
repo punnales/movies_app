@@ -1,9 +1,9 @@
 package com.punnales.moviesapp.data.remote.mappers
 
 import com.punnales.moviesapp.core.domain.*
-import com.punnales.moviesapp.data.remote.dto.MovieListResponseDTO
-import com.punnales.moviesapp.data.remote.dto.MovieResponseDTO
-import com.punnales.moviesapp.data.remote.dto.ResourceRouteDTO
+import com.punnales.moviesapp.data.remote.dto.response.MovieListResponseDTO
+import com.punnales.moviesapp.data.remote.dto.response.MovieResponseDTO
+import com.punnales.moviesapp.data.remote.dto.response.ResourceRouteDTO
 
 fun MovieListResponseDTO.fromRemote() =
     Pair(movieList.map(MovieResponseDTO::fromRemote), resourceRouteList.map(ResourceRouteDTO::fromRemote))

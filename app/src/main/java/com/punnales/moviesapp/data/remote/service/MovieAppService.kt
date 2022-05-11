@@ -1,10 +1,13 @@
 package com.punnales.moviesapp.data.remote.service
 
 import com.punnales.moviesapp.BuildConfig
-import com.punnales.moviesapp.data.remote.dto.LoginResponseDTO
-import com.punnales.moviesapp.data.remote.dto.MovieListResponseDTO
-import com.punnales.moviesapp.data.remote.dto.UserResponseDTO
+import com.punnales.moviesapp.data.remote.dto.request.TransactionRequestDTO
+import com.punnales.moviesapp.data.remote.dto.response.LoginResponseDTO
+import com.punnales.moviesapp.data.remote.dto.response.MovieListResponseDTO
+import com.punnales.moviesapp.data.remote.dto.response.TransactionListResponseDTO
+import com.punnales.moviesapp.data.remote.dto.response.UserResponseDTO
 import com.punnales.moviesapp.data.remote.utils.ENDPOINT_LOGIN
+import com.punnales.moviesapp.data.remote.utils.ENDPOINT_TRANSACTIONS
 import com.punnales.moviesapp.data.remote.utils.ENDPOINT_MOVIES
 import com.punnales.moviesapp.data.remote.utils.ENDPOINT_USER_PROFILE
 import retrofit2.http.*
@@ -30,5 +33,8 @@ interface MovieAppService {
 
     @GET(ENDPOINT_MOVIES)
     suspend fun fetchMovieList(): MovieListResponseDTO
+
+    @POST(ENDPOINT_TRANSACTIONS)
+    suspend fun fetchTransactionList(@Body transactionRequestDTO: TransactionRequestDTO): TransactionListResponseDTO
 
 }

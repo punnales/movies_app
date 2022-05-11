@@ -23,6 +23,7 @@ android {
         //I will configure this keys without repository protection to allow an easy way to
         //build the application without add new files.
         buildConfigField 'String', 'API_KEY', "\"" + "stage_HNYh3RaK_Test" + "\""
+        buildConfigField 'String', 'API_KEY_AWS', "\"" + "mcYYa9KSC9s3YA5Hh68w" + "\""
         buildConfigField 'String', 'CLIENT_ID', "\"" + "IATestCandidate" + "\""
         buildConfigField 'String', 'CLIENT_SECRET', "\"" + "c840457e777b4fee9b510fbcd4985b68" + "\""
 
@@ -33,6 +34,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
     }
 
     buildFeatures {
@@ -102,6 +107,9 @@ dependencies {
     //Exoplayer
     implementation exoplayerDependencies.exoplayer
     implementation exoplayerDependencies.exoplayerUI
+
+    //Use of newest libraries in old Android OSs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     //Test
     testImplementation appTestDependencies.junit

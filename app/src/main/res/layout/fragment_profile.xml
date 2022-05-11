@@ -108,7 +108,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_login_email"
+        android:id="@+id/til_card_number"
         style="@style/MovieApp.TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_profile_phone_number">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_card_number"
             style="@style/MovieApp.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -139,12 +139,12 @@
         android:text="@string/profile_transactions_hint"
         android:textColor="@color/stroke_gray"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/til_login_email"
-        app:layout_constraintStart_toStartOf="@+id/til_login_email"
-        app:layout_constraintTop_toBottomOf="@+id/til_login_email" />
+        app:layout_constraintEnd_toEndOf="@+id/til_card_number"
+        app:layout_constraintStart_toStartOf="@+id/til_card_number"
+        app:layout_constraintTop_toBottomOf="@+id/til_card_number" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login_user"
+        android:id="@+id/btn_show_transactions"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="0dp"
         android:layout_height="60dp"

@@ -3,6 +3,7 @@ package com.punnales.moviesapp.presentation.profile
 import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
 import com.punnales.moviesapp.UserProto
+import com.punnales.moviesapp.core.interactors.user.FetchTransactionList
 import com.punnales.moviesapp.core.interactors.user.FetchUserProfile
 import com.punnales.moviesapp.core.mvi.AMviViewModel
 import com.punnales.moviesapp.data.local.datastore.mapper.fromDatastore
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val userDataStore: DataStore<UserProto>,
     private val fetchUserProfile: FetchUserProfile,
+    private val fetchTransactionList: FetchTransactionList,
 ) : AMviViewModel<UserIntent, ViewState, SingleEvent>() {
 
     private val _viewState =
@@ -39,6 +41,38 @@ class ProfileViewModel @Inject constructor(
         when (intent) {
             is UserIntent.UpdateUserProfile -> {
                 updateUserProfile()
+            }
+            is UserIntent.ShowTransactions -> handleShowTransactionIntent(intent.cardNumber)
+        }
+    }
+
+    private fun handleShowTransactionIntent(cardNumber: String?) {
+        viewModelScope.launch {
+            if (cardNumber.isNullOrEmpty())
+                sendEvent(SingleEvent.EmptyCardNumberError)
+            else
+                loadTransactionList(cardNumber)
+        }
+    }
+
+    private fun loadTransactionList(cardNumber: String) {
+        viewModelScope.launch {
+            fetchTransactionList(cardNumber).collect {
+                if (it !is FetchTransactionList.FetchTransactions.Loading)
+                    _viewState.update { ViewState.Idle }
+
+                when (it) {
+                    FetchTransactionList.FetchTransactions.ConnectionError -> {
+                        sendEvent(SingleEvent.ShowConnectionError)
+                    }
+                    FetchTransactionList.FetchTransactions.Loading -> _viewState.update { ViewState.Loading }
+                    is FetchTransactionList.FetchTransactions.Success -> {
+                        sendEvent(SingleEvent.ShowTransactionBottomSheet(it.listTransactions))
+                    }
+                    FetchTransactionList.FetchTransactions.UserNotFoundError -> {
+                        sendEvent(SingleEvent.ShowUserNotFoundError)
+                    }
+                }
             }
         }
     }
