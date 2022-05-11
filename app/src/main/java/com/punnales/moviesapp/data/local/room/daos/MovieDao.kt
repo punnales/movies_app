@@ -14,11 +14,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 abstract class MovieDao {
 
-    @Insert(onConflict = REPLACE)
-    abstract fun insertMovieList(movieList: List<MovieDTO>)
+    @Query("SELECT * FROM movie WHERE id = :movieId")
+    abstract fun getMovie(movieId: Long): MovieDTO
 
     @Query("SELECT * FROM movie")
     abstract fun getPagedMovies(): PagingSource<Int, MovieDTO>
+
+    @Insert(onConflict = REPLACE)
+    abstract fun insertMovieList(movieList: List<MovieDTO>)
 
     @Insert(onConflict = IGNORE)
     abstract fun insertResourceRouteList(resourceRouteList: List<ResourceRouteDTO>)

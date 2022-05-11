@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.map
 import com.google.android.material.snackbar.Snackbar
 import com.punnales.moviesapp.R
-import com.punnales.moviesapp.core.domain.Movie
-import com.punnales.moviesapp.core.domain.ResourceRoute
 import com.punnales.moviesapp.core.mvi.AMviFragment
 import com.punnales.moviesapp.core.mvi.MviIntent
 import com.punnales.moviesapp.core.mvi.MviSingleEvent
@@ -19,9 +17,7 @@ import com.punnales.moviesapp.data.local.room.mappers.fromDatabase
 import com.punnales.moviesapp.databinding.FragmentMovieListBinding
 import com.punnales.moviesapp.presentation.movie_list.adapter.MovieListAdapter
 import com.punnales.moviesapp.presentation.utils.GridRecyclerViewDecorator
-import com.punnales.moviesapp.presentation.utils.MoviesAppProgressLoader
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
@@ -32,31 +28,34 @@ class MovieListFragment : AMviFragment<MovieListFragment.UserIntent, MovieListFr
     override val viewModel: MovieListViewModel by viewModels()
 
     private lateinit var binding: FragmentMovieListBinding
-    private lateinit var moviesAppProgressLoader: MoviesAppProgressLoader
     private var movieListAdapter: MovieListAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentMovieListBinding.bind(view)
-        moviesAppProgressLoader = MoviesAppProgressLoader()
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun setupViews() {
+        setupMovieList()
         binding.swipeToRefresh.setOnRefreshListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.sendUserIntent(UserIntent.UpdateMovieList)
             }
         }
-        setupMovieList()
     }
 
     private fun setupMovieList() {
-        movieListAdapter = MovieListAdapter(emptyList()) { movieId ->
-            lifecycleScope.launch { viewModel.sendUserIntent(UserIntent.SelectMovie(movieId)) }
+        movieListAdapter = MovieListAdapter { movieId, imageUrl, image ->
+            lifecycleScope.launch { viewModel.sendUserIntent(UserIntent.SelectMovie(movieId, imageUrl, image)) }
         }
         binding.rvMovieList.apply {
             adapter = movieListAdapter
             addItemDecoration(GridRecyclerViewDecorator(requireContext(), 10, 3))
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.pagedMoviesFlow.collectLatest { pagingData ->
@@ -79,7 +78,13 @@ class MovieListFragment : AMviFragment<MovieListFragment.UserIntent, MovieListFr
     override fun handleSingleEvent(event: SingleEvent) {
         when (event) {
             SingleEvent.ShowConnectionError -> showAlert(R.string.alert_connection_error)
-            is SingleEvent.NavigateToMovieDetails -> {}
+            is SingleEvent.NavigateToMovieDetails -> {
+                val directions = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(event.movieId, event.imageUrl)
+                val extras = FragmentNavigatorExtras(
+                    event.image to "image_${event.movieId}"
+                )
+                navController.navigate(directions, extras)
+            }
         }
     }
 
@@ -97,7 +102,7 @@ class MovieListFragment : AMviFragment<MovieListFragment.UserIntent, MovieListFr
 
     sealed class UserIntent : MviIntent {
         object UpdateMovieList : UserIntent()
-        class SelectMovie(val movieId: Long) : UserIntent()
+        class SelectMovie(val movieId: Long, val imageUrl: String, val image: View) : UserIntent()
     }
 
     sealed class ViewState : MviViewState {
@@ -107,6 +112,6 @@ class MovieListFragment : AMviFragment<MovieListFragment.UserIntent, MovieListFr
 
     sealed class SingleEvent : MviSingleEvent {
         object ShowConnectionError : SingleEvent()
-        class NavigateToMovieDetails(val movieId: Long) : SingleEvent()
+        class NavigateToMovieDetails(val movieId: Long, val imageUrl: String, val image: View) : SingleEvent()
     }
 }

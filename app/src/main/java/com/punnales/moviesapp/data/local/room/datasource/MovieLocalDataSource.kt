@@ -19,4 +19,6 @@ interface MovieLocalDataSource : BaseDataSource {
 
     suspend fun getResourceRouteList(): Flow<List<ResourceRoute>>
 
+    suspend fun getMovie(movieId: Long): Resource<Movie>
+
 }

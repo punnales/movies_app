@@ -1,6 +1,7 @@
 package com.punnales.moviesapp.presentation.movie_list.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,7 +17,7 @@ import com.punnales.moviesapp.core.domain.ResourceSize
 import com.punnales.moviesapp.core.getMediaUrl
 import com.punnales.moviesapp.databinding.ItemMovieBinding
 
-class MovieListAdapter(var resourceRouteList: List<ResourceRoute>, private val movieSelectedCallback: (Long) -> Unit) :
+class MovieListAdapter(var resourceRouteList: List<ResourceRoute> = emptyList(), private val movieSelectedCallback: (Long, String, View) -> Unit) :
     PagingDataAdapter<Movie, MovieListAdapter.ViewHolder>(DiffCallback) {
 
     object DiffCallback : DiffUtil.ItemCallback<Movie>() {
@@ -41,14 +42,16 @@ class MovieListAdapter(var resourceRouteList: List<ResourceRoute>, private val m
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.binding) {
             getItem(position)?.let { movie ->
+                val mediaUrl = movie.getMediaUrl(resourceRouteList, ResourceCode.POSTER, ResourceSize.MEDIUM)
                 Glide.with(root)
-                    .load(movie.getMediaUrl(resourceRouteList, ResourceCode.POSTER, ResourceSize.MEDIUM))
+                    .load(mediaUrl)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .placeholder(R.color.black_variant)
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(ivItemMovieImage)
+                    .into(ivItemMoviePoster)
                 tvItemMovieName.text = movie.name
-                root.setOnClickListener { movieSelectedCallback(movie.id) }
+                ivItemMoviePoster.transitionName = "image_${movie.id}"
+                root.setOnClickListener { movieSelectedCallback(movie.id, mediaUrl, ivItemMoviePoster) }
             }
         }
     }

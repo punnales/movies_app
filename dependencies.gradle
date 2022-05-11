@@ -50,6 +50,9 @@ ext {
     //Paging
     pagingVersion = '3.1.1'
 
+    //Exoplayer
+    exoplayerVersion = '2.17.1'
+
     //Test
     junitVersion = '4.13.2'
     supportTestVersion = '1.1.3'
@@ -115,6 +118,11 @@ ext {
 
     pagingDependencies = [
             pagingRuntime: "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    ]
+
+    exoplayerDependencies = [
+            exoplayer  : "com.google.android.exoplayer:exoplayer:$exoplayerVersion",
+            exoplayerUI: "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
     ]
 
     appTestDependencies = [

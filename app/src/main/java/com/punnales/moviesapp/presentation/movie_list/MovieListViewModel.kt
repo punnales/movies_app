@@ -1,6 +1,5 @@
 package com.punnales.moviesapp.presentation.movie_list
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.punnales.moviesapp.core.domain.Movie
@@ -20,7 +19,7 @@ class MovieListViewModel @Inject constructor(
     private val addMovieList: AddMovieList,
     private val getPagedMovieList: GetPagedMovieList,
     private val addRouteResourceList: AddResourceRouteList,
-    private val getRouteResourceList: GetResourceRouteList,
+    private val getResourceRouteList: GetResourceRouteList,
 ) : AMviViewModel<UserIntent, ViewState, SingleEvent>() {
 
     private val _viewState =
@@ -34,7 +33,7 @@ class MovieListViewModel @Inject constructor(
         updateMovieList()
     }
 
-    suspend fun loadResourceRoutesList() = getRouteResourceList()
+    suspend fun loadResourceRoutesList() = getResourceRouteList()
 
     private fun updateMovieList() {
         viewModelScope.launch {
@@ -75,7 +74,7 @@ class MovieListViewModel @Inject constructor(
     override suspend fun handleIntent(intent: UserIntent) {
         when (intent) {
             UserIntent.UpdateMovieList -> updateMovieList()
-            is UserIntent.SelectMovie -> sendEvent(SingleEvent.NavigateToMovieDetails(intent.movieId))
+            is UserIntent.SelectMovie -> sendEvent(SingleEvent.NavigateToMovieDetails(intent.movieId, intent.imageUrl, intent.image))
         }
     }
 

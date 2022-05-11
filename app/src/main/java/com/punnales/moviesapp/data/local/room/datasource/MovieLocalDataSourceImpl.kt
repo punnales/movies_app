@@ -15,11 +15,12 @@ import javax.inject.Inject
 
 class MovieLocalDataSourceImpl @Inject constructor(private val movieDao: MovieDao) : MovieLocalDataSource {
 
+    override suspend fun getMovie(movieId: Long): Resource<Movie> = getResponse { movieDao.getMovie(movieId).fromDatabase() }
+
+    override fun getMovieList(): PagingSource<Int, MovieDTO> = movieDao.getPagedMovies()
+
     override suspend fun addMovieList(movieList: List<Movie>) =
         getResponse { movieDao.insertMovieList(movieList.map(Movie::toDatabase)) }
-
-    override fun getMovieList(): PagingSource<Int, MovieDTO> =
-        movieDao.getPagedMovies()
 
     override suspend fun addResourceRouteList(resourceRouteList: List<ResourceRoute>): Resource<Unit> =
         getResponse { movieDao.insertResourceRouteList(resourceRouteList.map { it.toDatabase() }) }

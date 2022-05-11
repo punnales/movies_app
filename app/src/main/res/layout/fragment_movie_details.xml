@@ -1,7 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.exoplayer2.ui.StyledPlayerView
+        android:id="@+id/movie_trailer_player"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:auto_show="false"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_movie_detail_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:show_buffering="when_playing" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_movie_trailer_preview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_movie_detail_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_movie_detail_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_movie_poster"
+        android:layout_width="130dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="16dp"
+        android:elevation="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_movie"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_movie_detail_30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_movie_detail_30"
+        app:shapeAppearance="@style/ShapeAppearance.Image" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_movie_trailer_play"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:elevation="3dp"
+        android:src="@drawable/ic_play"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_movie_detail_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/purple_primary" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_share"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="3dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_movie_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="8dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_movie_detail_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_movie_poster"
+        tools:text="The Avengers" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_item_movie_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/stroke_gray"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_movie_poster"
+        app:layout_constraintTop_toTopOf="@+id/guideline_movie_detail_30"
+        tools:text="Duration: 101 min" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_item_movie_rating"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:textColor="@color/stroke_gray"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_movie_detail_30"
+        tools:text="A/B" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_item_movie_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/stroke_gray"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_movie_duration"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_duration"
+        tools:text="Genre: Action" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_item_movie_synopsis"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/stroke_gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_movie_poster"
+        tools:text="Jack y Lulu, un par de amigos, se embarcan en una aventura salvaje. Una comedia de carretera sobre un ex soldado y un pastor belga, ambos con un carácter muy difícil de entender pero que deberán soportar si quieren darle el último adiós a su mejor amigo. En este viaje, aprenderán sobre la vulnerabilidad y la importancia de tenerse el uno al otro." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

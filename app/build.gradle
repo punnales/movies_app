@@ -99,6 +99,10 @@ dependencies {
     implementation networkDependencies.moshiKotlin
     implementation networkDependencies.okHttp
 
+    //Exoplayer
+    implementation exoplayerDependencies.exoplayer
+    implementation exoplayerDependencies.exoplayerUI
+
     //Test
     testImplementation appTestDependencies.junit
     androidTestImplementation appTestDependencies.supportJunit
