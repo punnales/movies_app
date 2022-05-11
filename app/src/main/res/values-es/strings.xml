@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movies App</string>
+    <string name="email">CORREO</string>
+    <string name="password">CONTRASEÑA</string>
+    <string name="login_subtitle">Por favor inicie sesión para continuar</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="alert_connection_error">Parece que está teniendo problemas de conexión, intente otra vez.</string>
+    <string name="alert_credentials_error">Correo o contraseña inválido</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_movies">Películas</string>
+    <string name="card_number">Tarjeta</string>
+    <string name="show">Mostrar</string>
+    <string name="profile_transactions_hint">Introduzca un número de tarjeta para obtener las últimas transacciones</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="profile_card_number">Tarjeta No. %s</string>
+    <string name="alert_empty_card_number">El número de tarjeta no puede estar vacío</string>
+    <string name="alert_user_not_found">Lo sentimos, no encontramos su usuario</string>
+</resources>
