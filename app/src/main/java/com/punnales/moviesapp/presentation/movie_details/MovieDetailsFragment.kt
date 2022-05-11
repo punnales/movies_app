@@ -17,6 +17,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.material.chip.Chip
+import com.google.common.base.Splitter
 import com.punnales.moviesapp.R
 import com.punnales.moviesapp.core.domain.Movie
 import com.punnales.moviesapp.core.domain.ResourceCode
@@ -119,9 +121,9 @@ class MovieDetailsFragment : AMviFragment<MovieDetailsFragment.UserIntent, Movie
         with(binding) {
             tvMovieName.text = viewState.movie.name
             tvItemMovieDuration.text = viewState.movie.length
-            tvItemMovieGenre.text = viewState.movie.genre
             tvItemMovieRating.text = viewState.movie.rating
             tvItemMovieSynopsis.text = viewState.movie.synopsis
+            setupGenres(viewState.movie.genre)
             Glide.with(root)
                 .load(viewState.movie.getMediaUrl(viewState.resourceRouteList, ResourceCode.BACKGROUND_SYNOPSIS, ResourceSize.MEDIUM))
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
@@ -129,6 +131,14 @@ class MovieDetailsFragment : AMviFragment<MovieDetailsFragment.UserIntent, Movie
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(ivMovieTrailerPreview)
             setupTrailer(viewState.movie.getMediaUrl(viewState.resourceRouteList, ResourceCode.TRAILER_MP4, ResourceSize.MEDIUM))
+        }
+    }
+
+    private fun setupGenres(genre: String) {
+        Splitter.on(",").splitToList(genre).forEach {
+            binding.chipGroupGenre.addView(
+                Chip(binding.root.context).apply { text = it }
+            )
         }
     }
 
@@ -173,6 +183,5 @@ class MovieDetailsFragment : AMviFragment<MovieDetailsFragment.UserIntent, Movie
     sealed class SingleEvent : MviSingleEvent {
         object ShowConnectionError : SingleEvent()
         object PlayTrailer : SingleEvent()
-        class NavigateToMovieDetails(val movieId: Long) : SingleEvent()
     }
 }
