@@ -36,7 +36,6 @@ class LoginFragment : AMviFragment<LoginFragment.UserIntent, LoginFragment.ViewS
             btnLoginUser.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.sendUserIntent(UserIntent.Login(
-                        //TODO Validate email
                         etLoginEmail.text?.toString() ?: "",
                         etLoginPassword.text?.toString() ?: ""
                     ))
